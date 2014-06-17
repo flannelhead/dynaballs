@@ -1,0 +1,53 @@
+html, body, canvas, span {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #002b36;
+    color: #586e75;
+    font-family: 'Source Code Pro', ;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+#header {
+    font-weight: 400;
+    font-size: 4rem;
+    line-height: 4rem;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 1rem;
+}
+
+#header, #main {
+    position: relative;
+    top: -2rem;
+}
+
+#main {
+    box-shadow: 0 0 20px #000507;
+    margin-top: 2rem;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: right;
+    vertical-align: middle;
+    line-height: 2rem;
+    padding-right: 0.5em;
+}
