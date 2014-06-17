@@ -58,7 +58,7 @@ window.addEventListener('load', function() {
 
     function removeBall() {
         if (config.nBalls === 1) return;
-        
+
         pause();
 
         config.nBalls -= 1;
@@ -84,16 +84,22 @@ window.addEventListener('load', function() {
 
     document.addEventListener('keypress', function(event) {
         var code = event.charCode;
+        var prevDefault = false;
 
         if (code === keys.rKey) {
             init();
+            prevDefault = true;
         } else if (code === keys.plusKey) {
             addBall();
+            prevDefault = true;
         } else if (code === keys.minusKey) {
             removeBall();
+            prevDefault = true;
         }
 
-        event.stopPropagation();
-        event.preventDefault();
+        if (prevDefault) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
     });
 });

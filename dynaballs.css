@@ -12,9 +12,12 @@ html, body {
 body {
     background-color: #002b36;
     color: #586e75;
-    font-family: 'Source Code Pro', ;
+
     font-size: 16px;
+    font-family: 'Source Code Pro', monospace;
     font-weight: 400;
+    font-style: normal;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -23,7 +26,6 @@ body {
 }
 
 #header {
-    font-weight: 400;
     font-size: 4rem;
     line-height: 4rem;
     letter-spacing: 1rem;
@@ -31,7 +33,7 @@ body {
 
 #header, #main, #help {
     position: relative;
-    top: -1.75rem;
+    top: -1.85rem;
 }
 
 #main {
@@ -41,7 +43,7 @@ body {
 }
 
 #help {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 #footer {
