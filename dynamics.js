@@ -1,5 +1,5 @@
 function applyForces(balls, G) {
-    var i, j, len, dx, dy, ball1, ball2, F, Fy, Fx, exp = -3 / 2;
+    var i, j, len, dx, dy, r, ball1, ball2, F, Fy, Fx;
 
     for (i = 0, len = balls.length; i < len; i++) {
         balls[i].Fx = balls[i].Fy = 0;
@@ -19,11 +19,11 @@ function applyForces(balls, G) {
             Fy = dy * F;
             ball2.Fx -= Fx;
             ball2.Fy -= Fy;
-            // Newton's third: the reaction force is equal but opposite
+            // Newton III: the reaction force is equal but opposite
             ball1.Fx += Fx;
             ball1.Fy += Fy;
         }
-        // Newton's II: a = F/m. Here radius squared represents mass.
+        // Newton II: a = F/m. Here radius squared represents mass.
         ball1.ax = ball1.oneOverR2 * ball1.Fx;
         ball1.ay = ball1.oneOverR2 * ball1.Fy;
     }

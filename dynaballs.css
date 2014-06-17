@@ -26,19 +26,22 @@ body {
     font-weight: 400;
     font-size: 4rem;
     line-height: 4rem;
-    margin: 0;
-    padding: 0;
     letter-spacing: 1rem;
 }
 
-#header, #main {
+#header, #main, #help {
     position: relative;
-    top: -2rem;
+    top: -1.75rem;
 }
 
 #main {
     box-shadow: 0 0 20px #000507;
     margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+#help {
+    font-size: 1.5rem;
 }
 
 #footer {

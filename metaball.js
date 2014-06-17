@@ -8,7 +8,7 @@ var metaball = {
     f: function(x, y) {
         var dx = x - this.x0,
             dy = y - this.y0,
-            r2 = dx*dx + dy*dy;
+            r2 = dx * dx + dy * dy;
 
         if (r2 < this.R2) return 1;
 
@@ -41,7 +41,7 @@ var metaball = {
         ball.x0 = ball.R + Math.round(Math.random() *
             (config.width - 2 * ball.R));
         ball.y0 = ball.R + Math.round(Math.random() *
-            (config.height - 2*ball.R));
+            (config.height - 2 * ball.R));
 
         ball.RGB = HSVtoRGB(config.hMin + (config.hMax - config.hMin) *
             Math.random(), 1, 1);
@@ -51,16 +51,21 @@ var metaball = {
 };
 
 function generateBalls(config) {
-    var n = config.nBalls, balls = [], newBall;
+    var n = config.nBalls, balls = [];
 
     while (n--) {
-        do {
-            newBall = metaball.randomize(config);
-        } while (collidesOthers(newBall, balls));
-        balls.push(newBall);
+        addNonCollidingBall(balls, config);
     }
 
     return balls;
+}
+
+function addNonCollidingBall(balls, config) {
+    var newBall;
+    do {
+        newBall = metaball.randomize(config);
+    } while (collidesOthers(newBall, balls));
+    balls.push(newBall);
 }
 
 function collidesOthers(newBall, balls) {
