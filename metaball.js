@@ -19,9 +19,9 @@ var metaball = {
     // potential at the distance r
     F: function(r) {
         if (r > this.Rwell) {
-            return this.R2 * (1 / (r * r));
+            return this.R2 / (r * r);
         }
-        return this.R2 * r * (this.a * r - this.b);
+        return this.R2 * r * (this.a * r + this.b);
     },
 
     randomize: function(config) {
@@ -36,7 +36,7 @@ var metaball = {
 
         // Constants for repulsive part of the interaction potential
         ball.a = 3 * (2 * config.k * ball.Rwell + 3) / Math.pow(ball.Rwell, 4);
-        ball.b = 1 / (ball.Rwell * ball.Rwell) - ball.a * ball.Rwell;
+        ball.b = 1 / Math.pow(ball.Rwell, 3) - ball.a * ball.Rwell;
 
         ball.x0 = ball.R + Math.round(Math.random() *
             (config.width - 2 * ball.R));
