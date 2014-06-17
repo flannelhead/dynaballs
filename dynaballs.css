@@ -54,3 +54,11 @@ body {
     line-height: 2rem;
     padding-right: 0.5em;
 }
+
+a:link, a:visited {
+    color: #2aa198;
+}
+
+a:hover {
+    color: #859900;
+}
