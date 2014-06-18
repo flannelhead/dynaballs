@@ -76,3 +76,8 @@ a:link, a:visited {
 a:hover {
     color: #859900;
 }
+
+.key {
+    color: #dc322f;
+    font-weight: 600;
+}

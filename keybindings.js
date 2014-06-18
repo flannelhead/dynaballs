@@ -1,12 +1,18 @@
 var keybindings = {
     listBindings: function(bindings, actions, ul) {
-        var key, li, a, actionName,
+        var key, li, span, a, actionName,
             fragment = document.createDocumentFragment();
 
         for (key in bindings) {
             actionName = bindings[key];
             li = document.createElement('li');
-            li.textContent = key + ' to ';
+            span = document.createElement('span');
+            span.className = 'key';
+            span.textContent = key;
+            li.appendChild(span);
+            span = document.createElement('span');
+            span.textContent = ' to ';
+            li.appendChild(span);
             a = document.createElement('a');
             a.href = '#';
             a.textContent = actions[actionName].description;
