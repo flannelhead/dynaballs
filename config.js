@@ -14,5 +14,11 @@ var config = {
     rWell: 2,  // Radius for the surrounding potential well
 
     hMin: 0.4,
-    hMax: 0.7
+    hMax: 0.7,
+
+    keybindings: {
+        'r': 'reset',
+        '+': 'add-ball',
+        '-': 'remove-ball'
+    }
 };

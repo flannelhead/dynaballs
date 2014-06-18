@@ -16,22 +16,25 @@
         <script src='graphics.js'></script>
         <script src='metaball.js'></script>
         <script src='dynamics.js'></script>
+        <script src='keybindings.js'></script>
         <script src='dynaballs.js'></script>
     </head>
 
     <body>
-        <span id='header'>Dynaballs</span>
+        <div id='content'>
+            <div id='header'>Dynaballs</div>
+            <div id='info'>
+                Keybindings:
+                <ul id='keys'></ul>
+            </div>
 
-        <canvas id='main'></canvas>
+            <canvas id='main'></canvas>
+        </div>
 
-        <span id='help'>
-            Hit '+' to add a ball, '-' to remove one and 'r' to restart.
-        </span>
-
-        <span id='footer'>
+        <div id='footer'>
             &copy Sakari Kapanen, 2014.
             <a href="https://github.com/Flannelhead/dynaballs">Source code</a>
             on GitHub.
-        </span>
+        </div>
     </body>
 </html>

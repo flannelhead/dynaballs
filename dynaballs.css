@@ -1,4 +1,4 @@
-html, body, canvas, span {
+html, body, canvas, div, ul, li {
     margin: 0;
     padding: 0;
     border: none;
@@ -18,10 +18,7 @@ body {
     font-weight: 400;
     font-style: normal;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: table;
     overflow: hidden;
 }
 
@@ -36,23 +33,36 @@ body {
     top: -1.85rem;
 }
 
+#content {
+    width: 100%;
+    position: relative;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
 #main {
     box-shadow: 0 0 20px #000507;
     margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-#help {
-    font-size: 1.3rem;
+#info {
+    position: absolute;
+    left: 0;
+    padding-left: 0.5em;
+    text-align: left;
+}
+
+#keys {
+    padding-left: 1.5em;
 }
 
 #footer {
     position: absolute;
     bottom: 0;
-    left: 0;
     right: 0;
     text-align: right;
-    vertical-align: middle;
     line-height: 2rem;
     padding-right: 0.5em;
 }

@@ -72,34 +72,22 @@ window.addEventListener('load', function() {
         mouseBall.y0 = event.clientY - canvas.offsetTop;
     });
 
-    function ascii(c) {
-        return c.charCodeAt(0);
-    }
-
-    var keys = {
-        rKey: ascii('r'),
-        plusKey: ascii('+'),
-        minusKey: ascii('-')
+    var keyActions = {
+        'reset': {
+            callback: init,
+            description: 'reset'
+        },
+        'add-ball': {
+            callback: addBall,
+            description: 'add a ball'
+        },
+        'remove-ball': {
+            callback: removeBall,
+            description: 'remove a ball'
+        }
     };
 
-    document.addEventListener('keypress', function(event) {
-        var code = event.charCode;
-        var prevDefault = false;
-
-        if (code === keys.rKey) {
-            init();
-            prevDefault = true;
-        } else if (code === keys.plusKey) {
-            addBall();
-            prevDefault = true;
-        } else if (code === keys.minusKey) {
-            removeBall();
-            prevDefault = true;
-        }
-
-        if (prevDefault) {
-            event.stopPropagation();
-            event.preventDefault();
-        }
-    });
+    keybindings.listBindings(config.keybindings, keyActions,
+        document.getElementById('keys'));
+    keybindings.bindKeys(config.keybindings, keyActions);
 });
