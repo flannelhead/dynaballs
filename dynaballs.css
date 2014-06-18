@@ -45,14 +45,16 @@ body {
     box-shadow: 0 0 20px #000507;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    left: -8rem;
+    z-index: 1;
 }
 
 #info {
-    float: left;
+    position: absolute;
+    left: 0;
     padding-left: 0.5rem;
     text-align: left;
     width: 15.5rem;
+    z-index: 2;
 }
 
 #keys {
