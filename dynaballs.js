@@ -20,9 +20,9 @@ window.addEventListener('load', function() {
         timestamp = time;
         reqId = requestAnimationFrame(draw);
 
-        takeTimestep(balls, dt, config);
-        ctx.putImageData(computeField(balls, ctx, config.width, config.height),
-            0, 0);
+        dynamics.takeTimestep(metaballs.balls, dt, config);
+        ctx.putImageData(graphics.computeField(metaballs.balls, ctx,
+            config.width, config.height), 0, 0);
     }
 
     function pause() {
@@ -39,8 +39,8 @@ window.addEventListener('load', function() {
     function init() {
         pause();
 
-        balls = generateBalls(config);
-        mouseBall = balls[0];
+        metaballs.generateBalls(config);
+        mouseBall = metaballs.balls[0];
         mouseBall.oneOverR2 = 0;
 
         resume();
@@ -51,7 +51,7 @@ window.addEventListener('load', function() {
         pause();
 
         config.nBalls += 1;
-        addNonCollidingBall(balls, config);
+        metaballs.addNonCollidingBall(config);
 
         resume();
     }
@@ -62,7 +62,7 @@ window.addEventListener('load', function() {
         pause();
 
         config.nBalls -= 1;
-        balls.pop();
+        metaballs.balls.pop();
 
         resume();
     }
