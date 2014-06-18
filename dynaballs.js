@@ -75,7 +75,7 @@ window.addEventListener('load', function() {
     var keyActions = {
         'reset': {
             callback: init,
-            description: 'reset'
+            description: 'restart'
         },
         'add-ball': {
             callback: addBall,
