@@ -25,6 +25,13 @@ var metaballs = {
             return this.R2 * r * (this.a * r + this.b);
         },
 
+        computeCoefficients: function(k) {
+            // Constants for repulsive part of the interaction potential
+            this.a = 3 * (2 * k * this.Rwell + 3) /
+                Math.pow(this.Rwell, 4);
+            this.b = 1 / Math.pow(this.Rwell, 3) - this.a * this.Rwell;
+        },
+
         randomize: function(config) {
             var ball = Object.create(this);
 
@@ -35,10 +42,7 @@ var metaballs = {
             ball.R2 = ball.R * ball.R;
             ball.oneOverR2 = 1 / ball.R2;
 
-            // Constants for repulsive part of the interaction potential
-            ball.a = 3 * (2 * config.k * ball.Rwell + 3) /
-                Math.pow(ball.Rwell, 4);
-            ball.b = 1 / Math.pow(ball.Rwell, 3) - ball.a * ball.Rwell;
+            ball.computeCoefficients(config.k);
 
             ball.x0 = ball.R + Math.round(Math.random() *
                 (config.width - 2 * ball.R));
@@ -49,6 +53,13 @@ var metaballs = {
                 (config.hMax - config.hMin) * Math.random(), 1, 1);
 
             return ball;
+        },
+    },
+
+    computeCoefficients: function(k) {
+        var i, len = this.balls.length;
+        for (i = 0; i < len; i++) {
+            this.balls[i].computeCoefficients(k);
         }
     },
 

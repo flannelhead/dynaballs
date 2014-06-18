@@ -2,7 +2,8 @@ window.addEventListener('load', function() {
     var canvas = document.getElementById('main'), ctx = canvas.getContext('2d'),
         timestamp = null, safeTimeout = 200, reqId = null,
         balls, mouseBall, frameCount = 0, sampleTime = 0,
-        fps = document.getElementById('fps');
+        fps = document.getElementById('fps'),
+        potential = document.getElementById('potential');
 
     config.rMin = Math.round(config.rMin * config.width);
     config.rMax = Math.round(config.rMax * config.width);
@@ -48,6 +49,7 @@ window.addEventListener('load', function() {
     function init() {
         pause();
 
+        refreshPotential();
         metaballs.generateBalls(config);
         mouseBall = metaballs.balls[0];
         mouseBall.oneOverR2 = 0;
@@ -76,6 +78,30 @@ window.addEventListener('load', function() {
         resume();
     }
 
+    function togglePotential() {
+        pause();
+
+        if (config.potential === 'repulsive') {
+            config.potential = 'attractive';
+        } else {
+            config.potential = 'repulsive';
+        }
+        refreshPotential();
+        metaballs.computeCoefficients(config.k);
+
+        resume();
+    }
+
+    function refreshPotential() {
+        if (config.potential === 'repulsive') {
+            config.k = config.kRepulsive;
+            potential.textContent = 'repulsive';
+        } else {
+            config.k = config.kAttractive;
+            potential.textContent = 'attractive';
+        }
+    }
+
     canvas.addEventListener('mousemove', function(event) {
         mouseBall.x0 = event.clientX - canvas.offsetLeft;
         mouseBall.y0 = event.clientY - canvas.offsetTop;
@@ -93,6 +119,10 @@ window.addEventListener('load', function() {
         'remove-ball': {
             callback: removeBall,
             description: 'remove a ball'
+        },
+        'toggle-potential': {
+            callback: togglePotential,
+            description: 'toggle potential'
         }
     };
 

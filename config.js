@@ -5,7 +5,10 @@ var config = {
     nBalls: 5,
 
     G: 1e-4,  // gravitation constant
-    k: 1e-3,  // potential barrier height
+
+    potential: 'repulsive',
+    kAttractive: -5e-1,
+    kRepulsive: 5e-2,
 
     rMin: 0.03,  // Min and max radius relative to width
     rMax: 0.06,
@@ -18,6 +21,7 @@ var config = {
 
     keybindings: {
         'r': 'reset',
+        't': 'toggle-potential',
         '+': 'add-ball',
         '-': 'remove-ball'
     }
