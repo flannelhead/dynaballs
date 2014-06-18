@@ -1,7 +1,8 @@
 window.addEventListener('load', function() {
     var canvas = document.getElementById('main'), ctx = canvas.getContext('2d'),
         timestamp = null, safeTimeout = 200, reqId = null,
-        balls, mouseBall;
+        balls, mouseBall, frameCount = 0, sampleTime = 0,
+        fps = document.getElementById('fps');
 
     config.rMin = Math.round(config.rMin * config.width);
     config.rMax = Math.round(config.rMax * config.width);
@@ -18,6 +19,14 @@ window.addEventListener('load', function() {
         // Prevent the simulation from exploding
         if (dt > safeTimeout) dt = 0;
         timestamp = time;
+        frameCount++;
+        sampleTime += dt;
+        if (sampleTime > 1000) {
+            fps.textContent = (1000 * frameCount / sampleTime).toFixed(1);
+            sampleTime = 0;
+            frameCount = 0;
+        }
+
         reqId = requestAnimationFrame(draw);
 
         dynamics.takeTimestep(metaballs.balls, dt, config);
