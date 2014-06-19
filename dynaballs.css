@@ -79,6 +79,10 @@ canvas {
     padding-right: 0.5rem;
 }
 
+.info a {
+    pointer-events: auto;
+}
+
 a:link, a:visited {
     color: #2aa198;
 }
