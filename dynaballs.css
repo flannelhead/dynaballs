@@ -53,7 +53,6 @@ body {
 canvas {
     box-shadow: 0 5px 20px #000507;
     z-index: 1;
-    /*margin-top: 0.25rem;*/
 }
 
 .info {
