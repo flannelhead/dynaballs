@@ -22,18 +22,18 @@ body {
     overflow: hidden;
 }
 
-#header {
+.header {
     font-size: 4rem;
     line-height: 4rem;
     letter-spacing: 1rem;
 }
 
-#header, #main {
+.header, canvas {
     position: relative;
     top: -1.85rem;
 }
 
-#content {
+.content {
     width: 100%;
     position: relative;
     text-align: center;
@@ -41,14 +41,14 @@ body {
     vertical-align: middle;
 }
 
-#main {
+canvas {
     box-shadow: 0 0 20px #000507;
     margin-top: 2rem;
     margin-bottom: 1rem;
     z-index: 1;
 }
 
-#info {
+.info {
     position: absolute;
     left: 0;
     padding-left: 0.5rem;
@@ -57,12 +57,12 @@ body {
     z-index: 2;
 }
 
-#keys {
+.keys {
     padding-left: 1.5rem;
     padding-bottom: 1rem;
 }
 
-#footer {
+.footer {
     position: absolute;
     bottom: 0;
     right: 0;
