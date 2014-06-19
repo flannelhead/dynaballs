@@ -28,7 +28,7 @@ body {
     letter-spacing: 1rem;
 }
 
-.header, canvas {
+.header {
     position: relative;
     top: -1.85rem;
 }
@@ -41,11 +41,19 @@ body {
     vertical-align: middle;
 }
 
-canvas {
-    box-shadow: 0 0 20px #000507;
-    margin-top: 2rem;
+.main-container {
+    text-align: right;
+    position: relative;
+    top: -2.85rem;
+    display: inline-block;
+    margin-top: 1.75rem;
     margin-bottom: 1rem;
+}
+
+canvas {
+    box-shadow: 0 5px 20px #000507;
     z-index: 1;
+    /*margin-top: 0.25rem;*/
 }
 
 .info {
