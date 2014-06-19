@@ -26,7 +26,8 @@ var metaballs = {
         },
 
         computeCoefficients: function(k) {
-            // Constants for repulsive part of the interaction potential
+            // Constants for repulsive / attractive part of the interaction
+            // potential
             this.a = 3 * (2 * k * this.Rwell + 3) /
                 Math.pow(this.Rwell, 4);
             this.b = 1 / Math.pow(this.Rwell, 3) - this.a * this.Rwell;
@@ -35,8 +36,10 @@ var metaballs = {
         randomize: function(config) {
             var ball = Object.create(this);
 
-            ball.R = config.rMin + Math.round(Math.random() *
-                (config.rMax - config.rMin));
+            var rMin = Math.round(config.rMin * config.width),
+                rMax = Math.round(config.rMax * config.width);
+
+            ball.R = rMin + Math.round(Math.random() * (rMax - rMin));
             ball.Rcoll = Math.round(config.rColl * ball.R);
             ball.Rwell = Math.round(config.rWell * ball.R);
             ball.R2 = ball.R * ball.R;
@@ -52,8 +55,42 @@ var metaballs = {
             ball.RGB = graphics.HSVtoRGB(config.hMin +
                 (config.hMax - config.hMin) * Math.random(), 1, 1);
 
+            ball.precomputeField(config);
+
             return ball;
         },
+
+        precomputeField: function(config) {
+            var field, xSave, ySave, x, y, f, n = 0,
+                width = 2 * config.width, height = 2 * config.height;
+
+            if (Uint8Array) {
+                // Compute a colour field covering four times the area of the
+                // canvas: 4 * 1 byte * 3 channels = 12
+                field = new Uint8Array(new ArrayBuffer(12 *
+                    config.width * config.height));
+            } else {
+                field = [];
+            }
+
+            xSave = this.x0;
+            ySave = this.y0;
+            this.x0 = config.width;
+            this.y0 = config.height;
+
+            for (y = 0; y < height; y++) {
+                for (x = 0; x < width; x++) {
+                    f = this.f(x, y);
+                    field[n++] = f * this.RGB.R;
+                    field[n++] = f * this.RGB.G;
+                    field[n++] = f * this.RGB.B;
+                }
+            }
+
+            this.x0 = xSave;
+            this.y0 = ySave;
+            this.field = field;
+        }
     },
 
     computeCoefficients: function(k) {
@@ -66,6 +103,7 @@ var metaballs = {
     generateBalls: function(config) {
         var n = config.nBalls;
         this.balls = [];
+        this.fields = [];
 
         while (n--) {
             this.addNonCollidingBall(config);
@@ -78,6 +116,12 @@ var metaballs = {
             newBall = this.metaball.randomize(config);
         } while (this.collidesOthers(newBall));
         this.balls.push(newBall);
+        this.fields.push(newBall.field);
+    },
+
+    popBall: function() {
+        this.balls.pop();
+        this.fields.pop();
     },
 
     collidesOthers: function(newBall) {

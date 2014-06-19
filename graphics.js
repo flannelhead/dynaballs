@@ -1,26 +1,32 @@
 var graphics = {
-    computeField: function(balls, ctx, width, height) {
-        var n = 0, len = balls.length, x, y, i, RGB, R, G, B, coeff,
-            imageData = ctx.createImageData(width, height),
-            data = imageData.data;
+    computeField: function(balls, fields, ctx, width, height) {
+        var imageData = ctx.createImageData(width, height),
+            data = imageData.data, threeWidth = 3 * width,
+            offsets = [], offset, field, n = 0, index = 0,
+            R, G, B, len, x, y, i;
+
+        for (i = 0, len = balls.length; i < len; i++) {
+            offsets[i] = 3 * (Math.round(height - balls[i].y0) * 2 * width +
+                Math.round(width - balls[i].x0));
+        }
 
         for (y = 0; y < height; y++) {
             for (x = 0; x < width; x++) {
-                R = 0;
-                G = 0;
-                B = 0;
+                R = G = B = 0;
                 for (i = 0; i < len; i++) {
-                    RGB = balls[i].RGB;
-                    coeff = balls[i].f(x, y);
-                    R += coeff * RGB.R;
-                    G += coeff * RGB.G;
-                    B += coeff * RGB.B;
+                    field = fields[i];
+                    offset = offsets[i] + index;
+                    R += field[offset];
+                    G += field[offset + 1];
+                    B += field[offset + 2];
                 }
+                index += 3;
                 data[n++] = R;
                 data[n++] = G;
                 data[n++] = B;
                 data[n++] = 255;
             }
+            index += threeWidth;
         }
 
         return imageData;

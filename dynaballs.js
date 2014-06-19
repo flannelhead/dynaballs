@@ -32,8 +32,8 @@ window.addEventListener('load', function() {
         reqId = requestAnimationFrame(draw);
 
         dynamics.takeTimestep(metaballs.balls, dt, config);
-        ctx.putImageData(graphics.computeField(metaballs.balls, ctx,
-            config.width, config.height), 0, 0);
+        ctx.putImageData(graphics.computeField(metaballs.balls,
+            metaballs.fields, ctx, config.width, config.height), 0, 0);
     }
 
     function pause() {
@@ -61,21 +61,17 @@ window.addEventListener('load', function() {
 
     function addBall() {
         pause();
-
-        config.nBalls += 1;
+        config.nBalls++;
         metaballs.addNonCollidingBall(config);
-
         resume();
     }
 
     function removeBall() {
-        if (config.nBalls === 1) return;
+        if (metaballs.balls.length === 1) return;
 
         pause();
-
-        config.nBalls -= 1;
-        metaballs.balls.pop();
-
+        config.nBalls--;
+        metaballs.popBall();
         resume();
     }
 

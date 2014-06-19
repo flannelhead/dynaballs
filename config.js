@@ -4,7 +4,7 @@ var config = {
 
     nBalls: 5,
 
-    G: 1e-4,  // gravitation constant
+    G: 2e-4,  // gravitation constant
 
     potential: 'repulsive',
     kAttractive: -5e-1,
