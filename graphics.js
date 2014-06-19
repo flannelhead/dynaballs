@@ -1,5 +1,5 @@
 var graphics = {
-    computeField: function(balls, fields, ctx, width, height) {
+    computeFieldFromPrecomputed: function(balls, fields, ctx, width, height) {
         var imageData = ctx.createImageData(width, height),
             data = imageData.data, threeWidth = 3 * width,
             offsets = [], offset, field, n = 0, index = 0,
@@ -27,6 +27,31 @@ var graphics = {
                 data[n++] = 255;
             }
             index += threeWidth;
+        }
+
+        return imageData;
+    },
+
+    computeField: function(balls, ctx, width, height) {
+        var imageData = ctx.createImageData(width, height),
+            data = imageData.data, len = balls.length,
+            n = 0, RGB, R, G, B, coeff, x, y, i;
+
+        for (y = 0; y < height; y++) {
+            for (x = 0; x < width; x++) {
+                R = G = B = 0;
+                for (i = 0; i < len; i++) {
+                    RGB = balls[i].RGB;
+                    coeff = balls[i].f(x, y);
+                    R += coeff * RGB.R;
+                    G += coeff * RGB.G;
+                    B += coeff * RGB.B;
+                }
+                data[n++] = R;
+                data[n++] = G;
+                data[n++] = B;
+                data[n++] = 255;
+            }
         }
 
         return imageData;

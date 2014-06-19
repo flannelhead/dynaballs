@@ -55,8 +55,6 @@ var metaballs = {
             ball.RGB = graphics.HSVtoRGB(config.hMin +
                 (config.hMax - config.hMin) * Math.random(), 1, 1);
 
-            ball.precomputeField(config);
-
             return ball;
         },
 
@@ -90,6 +88,7 @@ var metaballs = {
             this.x0 = xSave;
             this.y0 = ySave;
             this.field = field;
+            return field;
         }
     },
 
@@ -103,7 +102,6 @@ var metaballs = {
     generateBalls: function(config) {
         var n = config.nBalls;
         this.balls = [];
-        this.fields = [];
 
         while (n--) {
             this.addNonCollidingBall(config);
@@ -116,7 +114,6 @@ var metaballs = {
             newBall = this.metaball.randomize(config);
         } while (this.collidesOthers(newBall));
         this.balls.push(newBall);
-        this.fields.push(newBall.field);
     },
 
     popBall: function() {
@@ -134,5 +131,21 @@ var metaballs = {
             if (dx * dx + dy * dy < minDist * minDist) return true;
         }
         return false;
+    },
+
+    precomputeFields: function(config) {
+        var i, len = this.balls.length;
+        this.fields = [];
+        for(i = 0; i < len; i++) {
+            this.fields[i] = this.balls[i].precomputeField(config);
+        }
+    },
+
+    discardFields: function() {
+        var i, len = this.balls.length;
+        this.fields = [];
+        for(i = 0; i < len; i++) {
+            this.balls[i].field = null;
+        }
     }
 };

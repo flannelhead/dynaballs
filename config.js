@@ -6,9 +6,11 @@ var config = {
 
     G: 2e-4,  // gravitation constant
 
+    highPrecision: false,
+
     potential: 'repulsive',
-    kAttractive: -5e-1,
-    kRepulsive: 5e-2,
+    kAttractive: -3e-1,
+    kRepulsive: 7e-2,
 
     rMin: 0.03,  // Min and max radius relative to width
     rMax: 0.06,
@@ -20,9 +22,10 @@ var config = {
     hMax: 0.7,
 
     keybindings: {
-        'r': 'reset',
+        'r': 'restart',
         't': 'toggle-potential',
         '+': 'add-ball',
-        '-': 'remove-ball'
+        '-': 'remove-ball',
+        'p': 'toggle-precision'
     }
 };
