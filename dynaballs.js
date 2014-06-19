@@ -6,9 +6,6 @@ window.addEventListener('load', function() {
         potential = document.getElementById('potential'),
         canvasContainer = canvas.offsetParent;
 
-    config.rMin = Math.round(config.rMin * config.width);
-    config.rMax = Math.round(config.rMax * config.width);
-
     canvas.width = config.width;
     canvas.height = config.height;
     canvas.style.width = config.width + 'px';
