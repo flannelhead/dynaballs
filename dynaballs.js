@@ -1,7 +1,8 @@
 window.addEventListener('load', function() {
     var canvas = document.getElementById('main'), ctx = canvas.getContext('2d'),
         timestamp = null, safeTimeout = 200, reqId = null,
-        balls, mouseBall, frameCount = 0, sampleTime = 0,
+        balls, mouseBall, frameCount = 0, sampleTime = 0, remainder = 0,
+        timestep = 5,  // timestep of integration in ms
         fps = document.getElementById('fps'),
         potential = document.getElementById('potential'),
         canvasContainer = canvas.offsetParent;
@@ -12,10 +13,11 @@ window.addEventListener('load', function() {
     canvas.style.height = config.height + 'px';
 
     function draw(time) {
-        var dt;
+        var dt, nSteps;
+
         if (timestamp === null) timestamp = time;
         dt = time - timestamp;
-        // Prevent the simulation from exploding
+        // Prevent the simulation from jamming because of a too long timestep
         if (dt > safeTimeout) dt = 0;
         timestamp = time;
         frameCount++;
@@ -26,11 +28,17 @@ window.addEventListener('load', function() {
             frameCount = 0;
         }
 
-        reqId = requestAnimationFrame(draw);
+        dt += remainder;
+        nSteps = Math.floor(dt / timestep);
+        remainder = dt - nSteps * timestep;
+        while (nSteps--) {
+            dynamics.takeTimestep(metaballs.balls, timestep, config);
+        }
 
-        dynamics.takeTimestep(metaballs.balls, dt, config);
         ctx.putImageData(graphics.computeField(metaballs.balls,
             metaballs.fields, ctx, config.width, config.height), 0, 0);
+
+        reqId = requestAnimationFrame(draw);
     }
 
     function pause() {
