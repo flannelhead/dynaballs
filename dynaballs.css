@@ -62,6 +62,7 @@ canvas {
     text-align: left;
     width: 15.5rem;
     z-index: 2;
+    pointer-events: none;
 }
 
 .keys {
