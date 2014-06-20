@@ -113,6 +113,11 @@ var metaballs = {
         do {
             newBall = this.metaball.randomize(config);
         } while (this.collidesOthers(newBall));
+
+        if (config.highPrecision === false) {
+            this.fields.push(newBall.precomputeField(config));
+        }
+
         this.balls.push(newBall);
     },
 
@@ -147,5 +152,8 @@ var metaballs = {
         for(i = 0; i < len; i++) {
             this.balls[i].field = null;
         }
-    }
+    },
+
+    fields: [],
+    balls: []
 };

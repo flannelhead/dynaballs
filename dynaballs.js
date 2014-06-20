@@ -68,18 +68,18 @@ window.addEventListener('load', function() {
             dynamics.takeTimestep(metaballs.balls, timestep, config);
         }
 
-        reqId = requestAnimationFrame(draw);
+        reqId = window.requestAnimationFrame(draw);
     }
 
-    function pause() {
+    function cancelFrame() {
         if (reqId !== null) {
-            cancelAnimationFrame(reqId);
+            window.cancelAnimationFrame(reqId);
             reqId = null;
         }
     }
 
-    function resume() {
-        reqId = requestAnimationFrame(draw);
+    function requestFrame() {
+        reqId = window.requestAnimationFrame(draw);
     }
 
     function init() {
@@ -89,7 +89,7 @@ window.addEventListener('load', function() {
 
         keybindings.listBindings(config.keybindings, keyActions,
             document.getElementById('keys'));
-        keybindings.bindKeys(config.keybindings, keyActions);                
+        keybindings.bindKeys(config.keybindings, keyActions);
 
         canvas.addEventListener('mousemove', function(event) {
             mouseBall.x0 = event.clientX - canvas.offsetLeft -
@@ -98,7 +98,7 @@ window.addEventListener('load', function() {
                 canvasContainer.offsetTop;
         });
 
-        resume();
+        requestFrame();
     }
 
     function initBalls() {
@@ -108,30 +108,31 @@ window.addEventListener('load', function() {
     }
 
     function restart() {
-        pause();
+        cancelFrame();
         initBalls();
         refreshPrecision();
-        resume();
+        requestFrame();
     }
 
     function addBall() {
-        pause();
+        cancelFrame();
         config.nBalls++;
         metaballs.addNonCollidingBall(config);
-        resume();
+
+        requestFrame();
     }
 
     function removeBall() {
         if (metaballs.balls.length === 1) return;
 
-        pause();
+        cancelFrame();
         config.nBalls--;
         metaballs.popBall();
-        resume();
+        requestFrame();
     }
 
     function togglePotential() {
-        pause();
+        cancelFrame();
 
         if (config.potential === 'repulsive') {
             config.potential = 'attractive';
@@ -141,11 +142,11 @@ window.addEventListener('load', function() {
         refreshPotential();
         metaballs.computeCoefficients(config.k);
 
-        resume();
+        requestFrame();
     }
 
     function togglePrecision() {
-        pause();
+        cancelFrame();
 
         if (config.highPrecision === true) {
             config.highPrecision = false;
@@ -154,7 +155,7 @@ window.addEventListener('load', function() {
         }
         refreshPrecision();
 
-        resume();
+        requestFrame();
     }
 
     function refreshPotential() {
