@@ -87,7 +87,6 @@ var metaballs = {
 
             this.x0 = xSave;
             this.y0 = ySave;
-            this.field = field;
             return field;
         }
     },
@@ -147,11 +146,7 @@ var metaballs = {
     },
 
     discardFields: function() {
-        var i, len = this.balls.length;
         this.fields = [];
-        for(i = 0; i < len; i++) {
-            this.balls[i].field = null;
-        }
     },
 
     fields: [],

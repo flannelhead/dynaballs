@@ -174,7 +174,9 @@ window.addEventListener('load', function() {
             metaballs.discardFields();
         } else {
             precision.textContent = 'off';
-            metaballs.precomputeFields(config);
+            if (metaballs.fields.length !== metaballs.balls.length) {
+                metaballs.precomputeFields(config);
+            }
         }
     }
 
