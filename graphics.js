@@ -6,8 +6,8 @@ var graphics = {
             R, G, B, len, x, y, i;
 
         for (i = 0, len = balls.length; i < len; i++) {
-            offsets[i] = 3 * (Math.round(height - balls[i].y0) * 2 * width +
-                Math.round(width - balls[i].x0));
+            offsets[i] = 3 * (Math.floor(height - balls[i].y0) * 2 * width +
+                Math.floor(width - balls[i].x0));
         }
 
         for (y = 0; y < height; y++) {
