@@ -1,6 +1,6 @@
 window.addEventListener('load', function() {
     var canvas = document.getElementById('main'), ctx = canvas.getContext('2d'),
-        timestamp = null, safeTimeout = 200, reqId = null,
+        timestamp = null, safeTimeout = 1000, reqId = null,
         balls, mouseBall, frameCount = 0, sampleTime = 0, remainder = 0,
         timestep = 5,  // timestep of integration in ms
         fps = document.getElementById('fps'),
