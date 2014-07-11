@@ -2,7 +2,7 @@ var config = {
     width: 800,
     height: 450,
 
-    nBalls: 5,
+    nBalls: 4,
 
     G: 2e-4,  // gravitation constant
 
