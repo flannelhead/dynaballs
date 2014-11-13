@@ -50,6 +50,7 @@ also consumes more memory. In the high precision mode, the fields are computed
 every frame, which is quite CPU intensive, but we get to use floating point
 arithmetics during the whole rendering and don't need to consume as much memory.
 
-
+Contributions
+-------------
 Feel free to investigate and use the code for your own purposes. Contributions
 and ideas are also welcome!
