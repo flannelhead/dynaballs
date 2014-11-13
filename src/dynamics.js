@@ -89,3 +89,4 @@ var dynamics = {
         dynamics.solveCollisions(balls, config.width, config.height);
     }
 };
+

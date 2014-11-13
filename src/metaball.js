@@ -17,6 +17,24 @@ var metaball = {
 
     // Computes the magnitude of the force field derived from the
     // interaction potential at the distance r
+    //
+    // At large distances, the interaction potential has the same form as
+    // gravitation or electric potential, V = m/r, and hence the force is
+    // F = -dV/dr = m/r^2. Here the mass m is proportional to the area (or
+    // radius squared) of the metaball.
+    //
+    // At close distances, the interaction potential is a third degree
+    // polynomial function derived with the following conditions:
+    // 1. The potential must be continuous at the transition between this and
+    // the gravity-like potential.
+    // 2. The derivative of the potential (ie. the force) must also be
+    // continuous at the transition.
+    // 3. The potential has the value k (either positive or negative) at r = 0.
+    // 4. The derivative is zero at r = 0 (continuity of the force).
+    //
+    // So the close-distance interaction potential is either repulsive or
+    // attractive, depending on whether the user chooses the value k to be
+    // positive (potential barrier) or negative (potential well).
     F: function(r) {
         if (r > this.Rwell) {
             return this.R2 / (r * r);
@@ -26,7 +44,8 @@ var metaball = {
 
     computeCoefficients: function(k) {
         // Constants for repulsive / attractive part of the interaction
-        // potential
+        // potential. Description of the conditions used to derive these can be
+        // found above.
         this.a = 3 * (2 * k * this.Rwell + 3) /
             Math.pow(this.Rwell, 4);
         this.b = 1 / Math.pow(this.Rwell, 3) - this.a * this.Rwell;
@@ -89,3 +108,4 @@ var metaball = {
         return field;
     }
 };
+
