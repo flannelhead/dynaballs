@@ -1,7 +1,7 @@
 dynaballs
 =========
 
-*See the demo at* https://flannelhead.github.io/dynaballs
+**See the demo at** https://flannelhead.github.io/dynaballs
 (the page is very resource intensive). Works on HTML5-capable browsers.
 
 What?
@@ -11,6 +11,8 @@ done in plain JavaScript.
 
 Why?
 ----
+For fun, to make a cool looking graphics demo!
+
 To demonstrate rendering of [metaballs](https://en.wikipedia.org/wiki/Metaballs)
 on a canvas (in a pretty fast manner), combined with dynamics simulation using
 some basic Newtonian mechanics and
@@ -31,6 +33,8 @@ The interaction potential of a metaball is defined in two pieces:
 Thus there can be quite interesting phenomena, like two or more balls trapping
 each other (try reversing the potential in that situation!)
 
+I will upload the derivation of the potential if I have time.
+
 What's the high precision mode about?
 -------------------------------------
 When the high precision mode is not enabled, the metaballs are precomputed.
@@ -46,3 +50,6 @@ also consumes more memory. In the high precision mode, the fields are computed
 every frame, which is quite CPU intensive, but we get to use floating point
 arithmetics during the whole rendering and don't need to consume as much memory.
 
+
+Feel free to investigate and use the code for your own purposes. Contributions
+and ideas are also welcome!
